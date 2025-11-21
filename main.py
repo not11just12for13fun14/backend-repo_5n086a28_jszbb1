@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 from bson import ObjectId
+from datetime import datetime, timedelta
 
 from database import db, create_document, get_documents
 from schemas import Event, Service, Booking
@@ -62,6 +63,96 @@ def serialize_doc(doc):
         return doc
     doc["id"] = str(doc.pop("_id"))
     return doc
+
+# Seed endpoint to populate sample data
+@app.post("/api/seed", response_model=dict)
+async def seed_sample_data():
+    if db is None:
+        raise HTTPException(status_code=500, detail="Database not available")
+
+    created = {"events": 0, "services": 0}
+
+    # Only seed if empty
+    if db["event"].count_documents({}) == 0:
+        now = datetime.utcnow()
+        samples_events = [
+            Event(
+                title="Summer Music Fest",
+                description="An open-air festival with indie and electronic artists.",
+                date=(now + timedelta(days=14)).strftime("%Y-%m-%d"),
+                location="Central Park",
+                price=49.0,
+                featured=True,
+                image_url="https://images.unsplash.com/photo-1472653431158-6364773b2a56?q=80&w=1600&auto=format&fit=crop",
+                tags=["music", "festival", "outdoor"],
+            ),
+            Event(
+                title="Tech Talks Night",
+                description="Lightning talks on AI, Web, and Cloud.",
+                date=(now + timedelta(days=7)).strftime("%Y-%m-%d"),
+                location="Innovation Hub",
+                price=0.0,
+                featured=True,
+                image_url="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop",
+                tags=["tech", "networking"],
+            ),
+            Event(
+                title="Art & Wine Evening",
+                description="Sip and paint with local artists guiding the way.",
+                date=(now + timedelta(days=21)).strftime("%Y-%m-%d"),
+                location="Studio 54B",
+                price=35.0,
+                featured=False,
+                image_url="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1600&auto=format&fit=crop",
+                tags=["art", "social"],
+            ),
+            Event(
+                title="Community Yoga",
+                description="Morning flow suitable for all levels.",
+                date=(now + timedelta(days=3)).strftime("%Y-%m-%d"),
+                location="Riverside Lawn",
+                price=10.0,
+                featured=False,
+                image_url="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1600&auto=format&fit=crop",
+                tags=["wellness"],
+            ),
+        ]
+        for ev in samples_events:
+            create_document("event", ev)
+            created["events"] += 1
+
+    if db["service"].count_documents({}) == 0:
+        samples_services = [
+            Service(
+                name="Event Photography",
+                description="Professional photo coverage for events and portraits.",
+                price=120.0,
+                duration_minutes=120,
+                image_url="https://images.unsplash.com/photo-1487412912498-0447578fcca8?q=80&w=1600&auto=format&fit=crop",
+                category="Media",
+            ),
+            Service(
+                name="Catering Essentials",
+                description="Buffet-style catering for small to medium gatherings.",
+                price=300.0,
+                duration_minutes=0,
+                image_url="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1600&auto=format&fit=crop",
+                category="Food",
+            ),
+            Service(
+                name="DJ & Sound",
+                description="Music and sound system for parties and events.",
+                price=200.0,
+                duration_minutes=240,
+                image_url="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?q=80&w=1600&auto=format&fit=crop",
+                category="Entertainment",
+            ),
+        ]
+        for sv in samples_services:
+            create_document("service", sv)
+            created["services"] += 1
+
+    return {"status": "ok", "created": created}
 
 # Events endpoints
 
