@@ -1,0 +1,39 @@
+INFO:     Will watch for changes in these directories: ['/home/workspace']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [152] using StatReload
+INFO:     Started server process [154]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.20.0.1:34012 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:34020 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34028 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34040 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34020 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34028 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34040 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34028 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34020 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47410 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47412 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47428 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47410 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47412 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47428 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47412 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:47428 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34054 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34066 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34074 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34054 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34066 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34074 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34054 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:34066 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39170 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39174 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39182 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39170 - "GET /api/events?featured=true&limit=8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39174 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39182 - "GET /api/services?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39170 - "GET /api/events?q= HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39174 - "GET /api/services?q= HTTP/1.1" 200 OK

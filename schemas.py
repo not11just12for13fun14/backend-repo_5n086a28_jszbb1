@@ -12,7 +12,8 @@ Model name is converted to lowercase for the collection name:
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
+from datetime import datetime
 
 # Example schemas (replace with your own):
 
@@ -38,8 +39,35 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
+# Event & Service app schemas
+
+class Event(BaseModel):
+    title: str = Field(..., description="Event title")
+    description: Optional[str] = Field(None, description="Event description")
+    date: Optional[str] = Field(None, description="ISO date string for the event")
+    location: Optional[str] = Field(None, description="Event location")
+    price: Optional[float] = Field(0, ge=0, description="Ticket price")
+    featured: bool = Field(False, description="Whether the event is featured")
+    image_url: Optional[str] = Field(None, description="Cover image URL")
+    tags: Optional[List[str]] = Field(default_factory=list, description="Tags")
+
+class Service(BaseModel):
+    name: str = Field(..., description="Service name")
+    description: Optional[str] = Field(None, description="Service description")
+    price: Optional[float] = Field(0, ge=0, description="Base price")
+    duration_minutes: Optional[int] = Field(None, ge=0, description="Typical duration in minutes")
+    image_url: Optional[str] = Field(None, description="Image URL")
+    category: Optional[str] = Field(None, description="Category")
+
+class Booking(BaseModel):
+    item_type: str = Field(..., description="'event' or 'service'")
+    item_id: str = Field(..., description="ID of the event/service")
+    customer_name: str = Field(..., description="Customer full name")
+    customer_email: str = Field(..., description="Customer email")
+    scheduled_for: Optional[str] = Field(None, description="ISO datetime for booking if applicable")
+    notes: Optional[str] = Field(None, description="Additional notes")
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
 # Note: The Flames database viewer will automatically:
 # 1. Read these schemas from GET /schema endpoint
